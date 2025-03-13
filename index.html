@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goels Cafeteria - ISB</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        header {
+            background-color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            font-size: 20px;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        
+        .institute {
+            color: #2a9d8f;
+            font-weight: bold;
+        }
+        
+        .menu-section {
+            padding: 15px;
+        }
+        
+        h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        .menu-item {
+            background-color: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .item-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .item-details {
+            flex-grow: 1;
+        }
+        
+        .item-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .ingredients {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .price {
+            font-weight: bold;
+        }
+        
+        .preorder-btn {
+            background-color: #ff7f50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        
+        .filter-section {
+            padding: 0 15px 15px;
+        }
+        
+        .filter-options {
+            margin-bottom: 15px;
+        }
+        
+        .filter-option {
+            background: none;
+            border: 1px solid #ddd;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            display: inline-block;
+        }
+        
+        .filter-option.active {
+            background-color: #2a9d8f;
+            color: white;
+            border-color: #2a9d8f;
+        }
+        
+        .allergy-section {
+            padding: 0 15px 15px;
+        }
+        
+        .allergy-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            margin-top: 10px;
+        }
+        
+        .date-selector {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px 15px;
+            gap: 10px;
+        }
+        
+        .date-option {
+            min-width: 80px;
+            text-align: center;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .date-option.active {
+            background-color: #2a9d8f;
+            color: white;
+            border-color: #2a9d8f;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            background-color: white;
+            border-top: 1px solid #e0e0e0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        nav a {
+            color: #666;
+            text-decoration: none;
+            font-size: 24px;
+        }
+        
+        .tab-active {
+            color: #2a9d8f;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span>🍴 Goels Cafeteria</span>
+        </div>
+        <div class="institute">
+            <span>🏛 ISB</span>
+        </div>
+    </header>
+    
+    <div class="date-selector">
+        <div class="date-option active">Today</div>
+        <div class="date-option">Tomorrow</div>
+        <div class="date-option">Mar 14</div>
+        <div class="date-option">Mar 15</div>
+        <div class="date-option">Mar 16</div>
+    </div>
+    
+    <div class="menu-section">
+        <h2>Today's Menu</h2>
+        <div id="menu-container">
+            <div class="menu-item" data-vegetarian="true" data-gluten-free="false" data-nut-free="true">
+                <div class="item-image">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd" alt="Garden Salad">
+                </div>
+                <div class="item-details">
+                    <div class="item-name">Garden Salad</div>
+                    <div class="ingredients">Ingredients: Lettuce, Tomatoes, Cucumbers</div>
+                    <div class="price">Price: $5.99</div>
+                </div>
+                <button class="preorder-btn">Preorder</button>
+            </div>
+            
+            <div class="menu-item" data-vegetarian="true" data-gluten-free="false" data-nut-free="true">
+                <div class="item-image">
+                    <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8" alt="Spaghetti Marinara">
+                </div>
+                <div class="item-details">
+                    <div class="item-name">Spaghetti Marinara</div>
+                    <div class="ingredients">Ingredients: Spaghetti, Marinara Sauce, Parmesan</div>
+                    <div class="price">Price: $7.99</div>
+                </div>
+                <button class="preorder-btn">Preorder</button>
+            </div>
+            
+            <div class="menu-item" data-vegetarian="false" data-gluten-free="true" data-nut-free="true">
+                <div class="item-image">
+                    <img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b" alt="Grilled Chicken">
+                </div>
+                <div class="item-details">
+                    <div class="item-name">Grilled Chicken</div>
+                    <div class="ingredients">Ingredients: Chicken Breast, Herbs, Vegetables</div>
+                    <div class="price">Price: $8.99</div>
+                </div>
+                <button class="preorder-btn">Preorder</button>
+            </div>
+            
+            <div class="menu-item" data-vegetarian="false" data-gluten-free="false" data-nut-free="false">
+                <div class="item-image">
+                    <img src="https://images.unsplash.com/photo-1530219972477-74157875f353" alt="Peanut Noodle Bowl">
+                </div>
+                <div class="item-details">
+                    <div class="item-name">Peanut Noodle Bowl</div>
+                    <div class="ingredients">Ingredients: Noodles, Vegetables, Peanut Sauce</div>
+                    <div class="price">Price: $7.49</div>
+                </div>
+                <button class="preorder-btn">Preorder</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="filter-section">
+        <h2>Filter Menu</h2>
+        <div class="filter-options">
+            <div class="filter-option" data-filter="vegetarian">Vegetarian</div>
+            <div class="filter-option" data-filter="gluten-free">Gluten-Free</div>
+            <div class="filter-option" data-filter="nut-free">Nut-Free</div>
+        </div>
+    </div>
+    
+    <div class="allergy-section">
+        <h2>Manage Allergies</h2>
+        <input type="text" class="allergy-input" id="allergy-input" placeholder="Add your allergies">
+        <div id="allergy-tags"></div>
+    </div>
+    
+    <div style="height: 60px;"></div>
+    
+    <nav>
+        <a href="#" class="tab-active">🏠</a>
+        <a href="#">🔍</a>
+        <a href="#">🛒</a>
+        <a href="#">👤</a>
+    </nav>
+    
+    <script>
+        // Filter menu items based on selected options
+        const filterOptions = document.querySelectorAll('.filter-option');
+        const menuItems = document.querySelectorAll('.menu-item');
+        const allergyInput = document.getElementById('allergy-input');
+        const allergyTags = document.getElementById('allergy-tags');
+        const dateOptions = document.querySelectorAll('.date-option');
+        
+        // Active filters
+        let activeFilters = [];
+        let userAllergies = [];
+        
+        // Toggle filter options
+        filterOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const filter = this.getAttribute('data-filter');
+                
+                if (this.classList.contains('active')) {
+                    if (!activeFilters.includes(filter)) {
+                        activeFilters.push(filter);
+                    }
+                } else {
+                    activeFilters = activeFilters.filter(item => item !== filter);
+                }
+                
+                applyFilters();
+            });
+        });
+        
+        // Add allergy tags
+        allergyInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && this.value.trim() !== '') {
+                const allergy = this.value.trim().toLowerCase();
+                if (!userAllergies.includes(allergy)) {
+                    userAllergies.push(allergy);
+                    createAllergyTag(allergy);
+                    this.value = '';
+                    applyFilters();
+                }
+            }
+        });
+        
+        // Create allergy tag element
+        function createAllergyTag(allergy) {
+            const tag = document.createElement('div');
+            tag.classList.add('filter-option', 'active');
+            tag.textContent = allergy;
+            tag.addEventListener('click', function() {
+                userAllergies = userAllergies.filter(a => a !== allergy);
+                this.remove();
+                applyFilters();
+            });
+            allergyTags.appendChild(tag);
+        }
+        
+        // Apply all filters
+        function applyFilters() {
+            menuItems.forEach(item => {
+                let showItem = true;
+                
+                // Apply dietary filters
+                activeFilters.forEach(filter => {
+                    if (item.getAttribute(`data-${filter}`) !== 'true') {
+                        showItem = false;
+                    }
+                });
+                
+                // Apply allergy filters
+                if (showItem && userAllergies.length > 0) {
+                    const ingredients = item.querySelector('.ingredients').textContent.toLowerCase();
+                    userAllergies.forEach(allergy => {
+                        if (ingredients.includes(allergy)) {
+                            showItem = false;
+                        }
+                    });
+                }
+                
+                item.style.display = showItem ? 'flex' : 'none';
+            });
+        }
+        
+        // Date selector functionality
+        dateOptions.forEach(date => {
+            date.addEventListener('click', function() {
+                dateOptions.forEach(d => d.classList.remove('active'));
+                this.classList.add('active');
+                
+                // In a real app, this would fetch the menu for the selected date
+                if (this.textContent !== 'Today') {
+                    alert(`Menu for ${this.textContent} would be loaded here`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
